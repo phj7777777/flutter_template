@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/core/utils/toast.dart';
 import 'package:flutter_template/core/utils/utils.dart';
 import 'package:flutter_template/generated/i18n.dart';
-import 'package:image_picker_saver/image_picker_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share/share.dart';
 
@@ -104,7 +103,7 @@ class _SponsorPageState extends State<SponsorPage> {
   Future<String> saveNetworkImageToPhoto(String url,
       {bool useCache: true}) async {
     var data = await getNetworkImageData(url, useCache: useCache);
-    return await ImagePickerSaver.saveFile(fileData: data);
+    return null;
   }
 
   void shareImage(String url) {
