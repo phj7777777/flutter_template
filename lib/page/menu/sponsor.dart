@@ -15,11 +15,11 @@ class _SponsorPageState extends State<SponsorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(I18n.of(context).sponsor)),
+        appBar: AppBar(title: Text(I18n.of(context)!.sponsor)),
         body: SingleChildScrollView(
             padding: const EdgeInsets.all(10),
             child: Column(children: <Widget>[
-              Text(I18n.of(context).sponsorDescription,
+              Text(I18n.of(context)!.sponsorDescription,
                   style: TextStyle(color: Colors.grey[700], fontSize: 15)),
               SizedBox(height: 15),
               _loadImage(
@@ -100,7 +100,7 @@ class _SponsorPageState extends State<SponsorPage> {
     });
   }
 
-  Future<String> saveNetworkImageToPhoto(String url,
+  Future<String?> saveNetworkImageToPhoto(String url,
       {bool useCache: true}) async {
     var data = await getNetworkImageData(url, useCache: useCache);
     return null;

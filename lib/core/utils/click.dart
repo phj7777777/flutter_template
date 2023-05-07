@@ -4,11 +4,11 @@ import 'toast.dart';
 class ClickUtils {
   ClickUtils._internal();
 
-  static DateTime _lastPressedAt; //上次点击时间
+  static late DateTime _lastPressedAt; //上次点击时间
 
   //双击返回
   static Future<bool> exitBy2Click(
-      {int duration = 1000, ScaffoldState status}) async {
+      {int duration = 1000,  ScaffoldState? status}) async {
     if (status != null && status.isDrawerOpen) {
       return Future.value(true);
     }

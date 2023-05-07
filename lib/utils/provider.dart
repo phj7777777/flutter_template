@@ -16,7 +16,7 @@ class Store {
         ChangeNotifierProvider(
             create: (_) => AppTheme(getDefaultTheme(), getDefaultBrightness())),
         ChangeNotifierProvider.value(value: LocaleModel(SPUtils.getLocale())),
-        ChangeNotifierProvider.value(value: UserProfile(SPUtils.getNickName())),
+        ChangeNotifierProvider.value(value: UserProfile(SPUtils.getNickName()!)),
         ChangeNotifierProvider.value(value: AppStatus(TAB_HOME_INDEX)),
       ],
       child: child,
@@ -40,7 +40,7 @@ class Store {
 }
 
 MaterialColor getDefaultTheme() {
-  return AppTheme.materialColors[SPUtils.getThemeIndex()];
+  return AppTheme.materialColors[SPUtils.getThemeIndex()!];
 }
 
 Brightness getDefaultBrightness() {
@@ -102,7 +102,7 @@ const String LOCALE_FOLLOW_SYSTEM = "auto";
 ///语言
 class LocaleModel with ChangeNotifier {
   // 获取当前用户的APP语言配置Locale类，如果为null，则语言跟随系统语言
-  Locale getLocale() {
+  Locale? getLocale() {
     if (_locale == LOCALE_FOLLOW_SYSTEM) return null;
     var t = _locale.split("_");
     return Locale(t[0], t[1]);
@@ -119,7 +119,7 @@ class LocaleModel with ChangeNotifier {
   set locale(String locale) {
     if (_locale != locale) {
       _locale = locale;
-      I18n.locale = getLocale();
+      I18n.locale = getLocale()!;
       SPUtils.saveLocale(_locale);
       notifyListeners();
     }

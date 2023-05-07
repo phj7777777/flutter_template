@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:card_swiper/card_swiper.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_easyrefresh/material_footer.dart';
-import 'package:flutter_easyrefresh/material_header.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_template/core/utils/toast.dart';
 import 'package:flutter_template/core/widget/grid/grid_item.dart';
 import 'package:flutter_template/core/widget/list/article_item.dart';
@@ -18,7 +16,7 @@ class _TabHomePageState extends State<TabHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return EasyRefresh.custom(
+    return EasyRefresh.builder(
       header: MaterialHeader(),
       footer: MaterialFooter(),
       onRefresh: () async {
@@ -35,60 +33,9 @@ class _TabHomePageState extends State<TabHomePage> {
           });
         });
       },
-      slivers: <Widget>[
-        //=====轮播图=====//
-        SliverToBoxAdapter(child: getBannerWidget()),
-
-        //=====网格菜单=====//
-        SliverPadding(
-            padding: EdgeInsets.only(top: 10),
-            sliver: SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                mainAxisSpacing: 0,
-                crossAxisSpacing: 10,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  //创建子widget
-                  var action = actions[index];
-                  return GridItem(
-                      title: action.title,
-                      color: action.color,
-                      onTap: () {
-                        ToastUtils.toast('点击-->${action.title}');
-                      });
-                },
-                childCount: actions.length,
-              ),
-            )),
-
-        SliverToBoxAdapter(
-            child: Padding(
-                padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
-                child: Text(
-                  '资讯',
-                  style: TextStyle(fontSize: 18),
-                ))),
-
-        //=====列表=====//
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              ArticleInfo info = articles[index % 5];
-              return ArticleListItem(
-                  articleUrl: info.articleUrl,
-                  imageUrl: info.imageUrl,
-                  title: info.title,
-                  author: info.author,
-                  description: info.description,
-                  summary: info.summary);
-            },
-            childCount: _count,
-          ),
-        ),
-      ],
-    );
+    childBuilder: (BuildContext context, ScrollPhysics physics) {
+      return Container();
+    });
   }
 
   //这里是演示，所以写死

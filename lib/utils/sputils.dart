@@ -7,12 +7,10 @@ class SPUtils {
   /// 内部构造方法，可避免外部暴露构造函数，进行实例化
   SPUtils._internal();
 
-  static SharedPreferences _spf;
+  static late SharedPreferences _spf;
 
   static Future<SharedPreferences> init() async {
-    if (_spf == null) {
-      _spf = await SharedPreferences.getInstance();
-    }
+    _spf = await SharedPreferences.getInstance();
     return _spf;
   }
 
@@ -23,7 +21,7 @@ class SPUtils {
 
   static int getThemeIndex() {
     if (_spf.containsKey('key_theme_color')) {
-      return _spf.getInt('key_theme_color');
+      return _spf.getInt('key_theme_color')!;
     }
     return 0;
   }
@@ -35,7 +33,7 @@ class SPUtils {
 
   static Brightness getBrightness() {
     bool isDark = _spf.containsKey('key_brightness')
-        ? _spf.getBool('key_brightness')
+        ? _spf.getBool('key_brightness')!
         : false;
     return isDark ? Brightness.dark : Brightness.light;
   }
@@ -46,7 +44,7 @@ class SPUtils {
   }
 
   static String getLocale() {
-    String locale = _spf.getString('key_locale');
+    String locale = _spf.getString('key_locale')!;
     if (locale == null) {
       locale = LOCALE_FOLLOW_SYSTEM;
     }
@@ -59,7 +57,7 @@ class SPUtils {
   }
 
   static String getNickName() {
-    return _spf.getString('key_nickname');
+    return _spf.getString('key_nickname')!  ;
   }
 
   ///是否同意隐私协议
@@ -71,12 +69,12 @@ class SPUtils {
     if (!_spf.containsKey('key_agree_privacy')) {
       return false;
     }
-    return _spf.getBool('key_agree_privacy');
+    return _spf.getBool('key_agree_privacy')!;
   }
 
   ///是否已登陆
   static bool isLogined() {
     String nickName = getNickName();
-    return nickName != null && nickName.isNotEmpty;
+    return nickName.isNotEmpty;
   }
 }

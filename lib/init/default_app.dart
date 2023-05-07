@@ -21,8 +21,8 @@ class DefaultApp {
 
   /// 必须要优先初始化的内容
   static Future<void> initFirst() async {
-    await SPUtils.init();
-    await LocaleUtils.init();
+   await SPUtils.init();
+   await LocaleUtils.init();
   }
 
   /// 程序初始化操作
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         localeResolutionCallback:
-            (Locale _locale, Iterable<Locale> supportedLocales) {
+            (Locale? _locale, Iterable<Locale> supportedLocales) {
           if (localeModel.getLocale() != null) {
             //如果已经选定语言，则不跟随系统
             return localeModel.getLocale();

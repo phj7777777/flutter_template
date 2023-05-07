@@ -62,7 +62,7 @@ class XHttp {
   }
 
   ///get请求
-  static Future get(String url, [Map<String, dynamic> params]) async {
+  static Future get(String url, [Map<String, dynamic>? params]) async {
     Response response;
     if (params != null) {
       response = await dio.get(url, queryParameters: params);
@@ -73,13 +73,13 @@ class XHttp {
   }
 
   ///post 表单请求
-  static Future post(String url, [Map<String, dynamic> params]) async {
+  static Future post(String url, [Map<String, dynamic>? params]) async {
     Response response = await dio.post(url, queryParameters: params);
     return response.data;
   }
 
   ///post body请求
-  static Future postJson(String url, [Map<String, dynamic> data]) async {
+  static Future postJson(String url, [Map<String, dynamic>? data]) async {
     Response response = await dio.post(url, data: data);
     return response.data;
   }
@@ -93,9 +93,11 @@ class XHttp {
         //进度
         print("$count $total");
       });
+      return response.data;
     } on DioError catch (e) {
       handleError(e);
+      return null;
     }
-    return response.data;
+
   }
 }

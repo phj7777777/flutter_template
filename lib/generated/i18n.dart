@@ -13,7 +13,7 @@ typedef LocaleChangeCallback = void Function(Locale locale);
 
 class I18n implements WidgetsLocalizations {
   const I18n();
-  static Locale _locale;
+  static late Locale _locale;
   static bool _shouldReload = false;
 
   static set locale(Locale newLocale) {
@@ -24,9 +24,9 @@ class I18n implements WidgetsLocalizations {
   static const GeneratedLocalizationsDelegate delegate = GeneratedLocalizationsDelegate();
 
   /// function to be invoked when changing the language
-  static LocaleChangeCallback onLocaleChanged;
+  static late LocaleChangeCallback onLocaleChanged;
 
-  static I18n of(BuildContext context) =>
+  static I18n? of(BuildContext context) =>
     Localizations.of<I18n>(context, WidgetsLocalizations);
 
   @override
@@ -298,9 +298,9 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocali
     ];
   }
 
-  LocaleResolutionCallback resolution({Locale fallback}) {
-    return (Locale locale, Iterable<Locale> supported) {
-      if (isSupported(locale)) {
+  LocaleResolutionCallback resolution({required Locale fallback}) {
+    return (Locale? locale, Iterable<Locale> supported) {
+      if (isSupported(locale!)) {
         return locale;
       }
       final Locale fallbackLocale = fallback ?? supported.first;
@@ -310,7 +310,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocali
 
   @override
   Future<WidgetsLocalizations> load(Locale locale) {
-    I18n._locale ??= locale;
+    I18n._locale = locale;
     I18n._shouldReload = false;
     final String lang = I18n._locale != null ? I18n._locale.toString() : "";
     final String languageCode = I18n._locale != null ? I18n._locale.languageCode : "";

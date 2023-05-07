@@ -15,8 +15,8 @@ class _WebViewPageState extends State<WebViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    String url = Get.parameters['url'];
-    return WebViewWidget(
+    String? url = Get.parameters['url'];
+    return WebViewWidget(controller: WebViewController(),
 
     );
   }
